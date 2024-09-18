@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TODO List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            margin: 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            margin: 10px auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 600px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TODO List</h1>
+        <ul>
+            {% for todo in todos %}
+                <li>
+                    {{ todo.title }} - {% if todo.completed %}Completed{% else %}<a href="{% url 'mark_completed' todo.pk %}">Mark as completed</a>{% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'add_todo' %}">Add a new TODO</a>
+    </div>
+</body>
+</html>
