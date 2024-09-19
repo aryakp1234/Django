@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Home</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 20px; background-color: #f9f9f9;">
+
+    <h1 style="color: #333; text-align: center;">Blog Posts</h1>
+
+    {% for post in posts %}
+        <article style="border: 1px solid #ddd; border-radius: 5px; padding: 15px; margin-bottom: 20px; background-color: #fff;">
+            <h2 style="color: #2c3e50;">{{ post.title }}</h2>
+            <p style="font-size: 14px; color: #7f8c8d;">By {{ post.author }} on {{ post.date_posted|date:"F d, Y" }}</p>
+            <div style="font-size: 16px; line-height: 1.5;">{{ post.content|slice:":300" }}...</div>
+            <a href="{% url 'post-detail' post.pk %}" style="text-decoration: none; color: #2980b9;">Read more</a>
+        </article>
+    {% endfor %}
+
+    <div class="pagination" style="text-align: center; margin-top: 20px;">
+        <span class="step-links">
+            {% if posts.has_previous %}
+                <a href="?page=1" style="margin-right: 10px; text-decoration: none; color: #2980b9;">&laquo; first</a>
+                <a href="?page={{ posts.previous_page_number }}" style="margin-right: 10px; text-decoration: none; color: #2980b9;">previous</a>
+            {% endif %}
+
+            <span class="current" style="margin-right: 10px; font-weight: bold;">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+            </span>
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}" style="margin-right: 10px; text-decoration: none; color: #2980b9;">next</a>
+                <a href="?page={{ posts.paginator.num_pages }}" style="text-decoration: none; color: #2980b9;">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>
