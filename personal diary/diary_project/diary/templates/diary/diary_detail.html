@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ entry.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #555;
+            font-size: 16px;
+        }
+        a {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        .entry-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .entry-content p {
+            margin-bottom: 10px;
+        }
+        .actions a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="entry-content">
+        <h1>{{ entry.title }}</h1>
+        <p>{{ entry.content }}</p>
+        <p><strong>Created on:</strong> {{ entry.created_at }}</p>
+    </div>
+
+    <div class="actions">
+        <a href="{% url 'diary_update' entry.pk %}">Edit</a>
+        <a href="{% url 'diary_delete' entry.pk %}">Delete</a>
+        <a href="{% url 'diary_list' %}">Back to the list</a>
+    </div>
+</body>
+</html>
+
